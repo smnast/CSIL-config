@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Function to download a ZIP file from GitHub and extract it to a specified directory
 # Credit: (Obviously) ChatGPT
 download_and_extract() {
@@ -63,4 +62,3 @@ symlink() {
 
 download_and_extract "https://github.com/clangd/clangd/releases/download/19.1.2/clangd-linux-19.1.2.zip" "$HOME/.local/bin"
 symlink "$HOME/.local/bin/clangd_19.1.2/bin/clangd" "$HOME/.local/bin/clangd"
-
