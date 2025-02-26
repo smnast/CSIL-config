@@ -1,0 +1,5 @@
+#!/bin/bash
+# For each "pointer" device, disable acceleration profile
+for device in $(xinput list | grep -i "pointer" | sed 's/.*id=\([0-9]*\).*/\1/'); do
+  xinput set-prop "$device" "libinput Accel Profile Enabled" 0 1 2&>/dev/null
+done
