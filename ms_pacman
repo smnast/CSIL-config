@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Function to download a ZIP file from GitHub and extract it to a specified directory
+# Credit: (Obviously) ChatGPT
+download_and_extract() {
+  # Input Parameters
+  local url=$1
+  local dest_dir=$2
+  
+  # Check if URL and destination directory are provided
+  if [ -z "$url" ] || [ -z "$dest_dir" ]; then
+    echo "Error: You must specify both a URL and a destination directory."
+    return 1
+  fi
+
+  # Check if the destination directory exists, create it if not
+  if [ ! -d "$dest_dir" ]; then
+    echo "Destination directory doesn't exist. Creating it..."
+    mkdir -p "$dest_dir" || { echo "Error: Failed to create directory $dest_dir"; return 1; }
+  fi
+
+  # Define the ZIP file name based on the URL (extracted from the last part of the URL)
+  local zip_file=$(basename "$url")
+
+  # Download the ZIP file
+  echo "Downloading $zip_file from GitHub..."
+  wget -q --show-progress "$url" -O "$zip_file" || { echo "Error: Failed to download the file."; return 1; }
+
+  # Extract the ZIP file to the specified directory
+  echo "Extracting $zip_file to $dest_dir..."
+  unzip -q "$zip_file" -d "$dest_dir" || { echo "Error: Failed to extract $zip_file."; return 1; }
+
+  # Check if extraction was successful
+  if [ $? -eq 0 ]; then
+    echo "Extraction successful!"
+  else
+    echo "Error: Extraction failed."
+    return 1
+  fi
+
+  # Delete the ZIP file after extraction
+  echo "Deleting $zip_file..."
+  rm -f "$zip_file" || { echo "Error: Failed to delete the ZIP file."; return 1; }
+  echo "ZIP file deleted successfully."
+
+  return 0
+}
+
+# Symlink given file to destination path
+symlink() {
+  # Input Parameters
+  local bin_dir=$1
+  local dest_dir=$2
+
+  # Check if URL and destination directory are provided
+  if [ -z "$bin_dir" ] || [ -z "$dest_dir" ]; then
+    echo "Error: You must specify both a file and a destination directory."
+    return 1
+  fi
+
+  ln -s "$bin_dir" "$dest_dir"
+}
+
+download_and_extract "https://github.com/clangd/clangd/releases/download/19.1.2/clangd-linux-19.1.2.zip" "$HOME/.local/bin"
+symlink "$HOME/.local/bin/clangd_19.1.2/bin/clangd" "$HOME/.local/bin/clangd"
+

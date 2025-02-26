@@ -1,0 +1,9 @@
+echo "Hit enter a few times:"
+ssh-keygen -t ed25519 -C "simonashton.dev@gmail.com"
+eval "$(ssh-agent -s)"
+
+echo "Copy the following public key and add it to your GitHub account:"
+cat ~/.ssh/id_ed25519.pub
+
+git config --global user.email "simonashton.dev@gmail.com"
+git config --global user.name "Simon Ashton"
