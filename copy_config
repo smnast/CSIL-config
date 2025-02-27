@@ -1,4 +1,4 @@
 #!/bin/bash
 cp -r ./copy_directly/. "$HOME"
-ln -s "$HOME/sfuhome/git/CSIL-data/" "$HOME/data"
-
+ln -s "$HOME/sfuhome/git/CSIL-data/" "$HOME/dev"
+ln -s "$HOME/sfuhome/git/" "$HOME/git"
