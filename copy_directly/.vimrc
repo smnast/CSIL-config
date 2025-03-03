@@ -13,6 +13,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'tpope/vim-commentary'
+Plug 'iaalm/terminal-drawer.vim'
 
 call plug#end() " end plugins
 
