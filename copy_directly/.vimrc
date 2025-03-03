@@ -12,6 +12,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'tpope/vim-commentary'
 
 call plug#end() " end plugins
 
@@ -37,8 +38,6 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
     nmap <buffer> <leader>l <plug>(lsp-document-diagnostics)
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
@@ -50,6 +49,10 @@ augroup lsp_install
     " is registered for a buffer.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+" ==== Comments ====
+filetype indent on
+autocmd FileType cpp setlocal commentstring=//\ %s
 
 " ==== Autocomplete ====
 let g:asyncomplete_auto_popup = 0
