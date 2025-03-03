@@ -26,7 +26,6 @@
         <value type="int" value="13"/>
         <value type="int" value="14"/>
       </property>
-      <property name="background-style" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
@@ -44,12 +43,11 @@
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
-      <property name="known-legacy-items" type="array">
-        <value type="string" value="network"/>
-        <value type="string" value="ibus panel"/>
-      </property>
       <property name="known-items" type="array">
         <value type="string" value="nm-applet"/>
+      </property>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="networkmanager applet"/>
       </property>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
